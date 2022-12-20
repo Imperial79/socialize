@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_route_transition/page_route_transition.dart';
@@ -21,8 +22,8 @@ import 'package:path/path.dart' as Path;
 import 'addStoryUi.dart';
 import 'feedCard.dart';
 import 'resources/colors.dart';
-import 'resources/pickImage.dart';
-import 'resources/storage_methods.dart';
+import 'services/pickImage.dart';
+import 'services/storage_methods.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({Key? key}) : super(key: key);
@@ -94,7 +95,7 @@ class _HomeUIState extends State<HomeUI> {
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -149,7 +150,7 @@ class _HomeUIState extends State<HomeUI> {
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(
@@ -558,12 +559,22 @@ class _HomeUIState extends State<HomeUI> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Text(
           'Socialize',
           style: TextStyle(
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
             color: primaryColor,
             fontSize: 30,
           ),
@@ -651,7 +662,7 @@ class _HomeUIState extends State<HomeUI> {
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
                                             ],
@@ -694,7 +705,7 @@ class _HomeUIState extends State<HomeUI> {
                               keyboardType: TextInputType.text,
                               style: TextStyle(
                                 color: Colors.grey.shade700,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 15,
                               ),
                               textCapitalization: TextCapitalization.sentences,
@@ -705,7 +716,7 @@ class _HomeUIState extends State<HomeUI> {
                                   color: isDarkMode
                                       ? Colors.grey
                                       : Colors.grey.shade400,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

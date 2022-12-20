@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialize/services/storage_methods.dart';
 
-import 'storage_methods.dart';
-import 'user_details.dart';
+import '../resources/user_details.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;

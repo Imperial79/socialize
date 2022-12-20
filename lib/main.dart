@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:page_route_transition/page_route_transition.dart';
 import 'package:socialize/rootScrUI.dart';
-import 'package:socialize/resources/auth.dart';
+import 'package:socialize/services/auth.dart';
 import 'package:socialize/resources/colors.dart';
-import 'package:socialize/registerUI.dart';
+
 import 'package:socialize/welcomeUI.dart';
 
 import 'resources/user_details.dart';
@@ -64,7 +64,8 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
         colorSchemeSeed: primaryColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        // textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        fontFamily: 'Product',
       ),
       home: FutureBuilder(
         future: AuthMethods().getCurrentuser(),

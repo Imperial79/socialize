@@ -2,13 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'resources/colors.dart';
 import 'resources/database.dart';
 import 'resources/myWidgets.dart';
-import 'resources/pickImage.dart';
+import 'services/pickImage.dart';
 
 class AddStoryUi extends StatefulWidget {
   const AddStoryUi({Key? key}) : super(key: key);
@@ -173,96 +172,79 @@ class _AddStoryUiState extends State<AddStoryUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Add a Story',
+          style: TextStyle(color: primaryColor, fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      'lib/assets/image/back.svg',
-                      color: primaryColor,
-                    ),
-                  ),
-                  Text(
-                    'Add a Story',
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Center(
-                  child: _file == null
-                      ? GestureDetector(
-                          onTap: () {
-                            selectPhoto(context);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(13),
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey.withOpacity(0.12),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: primaryColor,
-                              size: 70,
-                            ),
+              Center(
+                child: _file == null
+                    ? GestureDetector(
+                        onTap: () {
+                          selectPhoto(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(13),
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey.withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        )
-                      : Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              // height: 200,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
-                                  image: MemoryImage(_file!),
-                                  fit: BoxFit.fitWidth,
-                                ),
+                          child: Icon(
+                            Icons.add,
+                            color: primaryColor,
+                            size: 70,
+                          ),
+                        ),
+                      )
+                    : Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: MemoryImage(_file!),
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _file = null;
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.cyan.shade100,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    child: Text(
-                                      'Remove',
-                                      style: TextStyle(
-                                        color: Colors.cyan.shade700,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                          ),
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  _file = null;
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.cyan.shade100,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Text(
+                                    'Remove',
+                                    style: TextStyle(
+                                      color: Colors.cyan.shade700,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                ),
+                          ),
+                        ],
+                      ),
               ),
               _file == null
                   ? Container()
@@ -292,38 +274,38 @@ class _AddStoryUiState extends State<AddStoryUi> {
                         ),
                       ),
                     ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 10,
-                  left: 15,
-                  right: 15,
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    uploadStory();
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  color: primaryColor,
-                  elevation: 0,
-                  highlightElevation: 0,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        'Add to Story',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          top: 10,
+          left: 15,
+          right: 15,
+        ),
+        child: MaterialButton(
+          onPressed: () {
+            uploadStory();
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          color: primaryColor,
+          elevation: 0,
+          highlightElevation: 0,
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              'Add to Story',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

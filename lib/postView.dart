@@ -256,13 +256,11 @@ class _PostViewState extends State<PostView> {
                       height: 15,
                     ),
                     Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: primaryScaffoldColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                        ),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         children: [

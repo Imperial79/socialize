@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_route_transition/page_route_transition.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:socialize/resources/auth.dart';
+import 'package:socialize/services/auth.dart';
 
 import 'addStoryUi.dart';
 import 'editProfileUi.dart';
@@ -99,7 +99,7 @@ class _ProfileUiState extends State<ProfileUi> {
         return Text(
           'No Posts',
           style: TextStyle(
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             color: Colors.blueGrey.shade200,
             fontSize: 20,
           ),
@@ -128,7 +128,7 @@ class _ProfileUiState extends State<ProfileUi> {
           return Text(
             snapshot.data['followers'].length.toString(),
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: Colors.blueGrey.shade700,
               fontSize: 20,
             ),
@@ -137,7 +137,7 @@ class _ProfileUiState extends State<ProfileUi> {
           return Text(
             '0',
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: Colors.blueGrey.shade700,
               fontSize: 20,
             ),
@@ -157,7 +157,7 @@ class _ProfileUiState extends State<ProfileUi> {
           return Text(
             snapshot.data['following'].length.toString(),
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: Colors.blueGrey.shade700,
               fontSize: 20,
             ),
@@ -166,7 +166,7 @@ class _ProfileUiState extends State<ProfileUi> {
           return Text(
             '0',
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: Colors.blueGrey.shade700,
               fontSize: 20,
             ),
@@ -178,8 +178,6 @@ class _ProfileUiState extends State<ProfileUi> {
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldColor = isDarkMode ? Colors.grey.shade900 : Colors.white;
-
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
         statusBarBrightness: Brightness.dark,
@@ -193,6 +191,7 @@ class _ProfileUiState extends State<ProfileUi> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             SvgPicture.asset(
@@ -226,18 +225,20 @@ class _ProfileUiState extends State<ProfileUi> {
               child: Column(
                 children: [
                   Stack(
-                    // alignment: Alignment.bottomLeft,
                     children: [
                       Container(
-                        // color: Colors.black,
                         width: double.infinity,
                         height: 205,
                       ),
                       Container(
+                        margin: EdgeInsets.all(10),
                         padding: EdgeInsets.all(20),
                         height: 160,
                         width: double.infinity,
-                        decoration: BoxDecoration(),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                         child: Text(
                           UserDetails.bio,
                           style: TextStyle(
@@ -246,39 +247,10 @@ class _ProfileUiState extends State<ProfileUi> {
                             fontWeight: FontWeight.w900,
                           ),
                         ),
-                        // CachedNetworkImage(
-                        //   imageUrl:
-                        //       'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',
-                        //   fit: BoxFit.cover,
-                        //   imageBuilder: (context, imageProvider) => Container(
-                        //     alignment: Alignment.topLeft,
-                        //     height: 160,
-                        //     padding: EdgeInsets.all(20),
-                        //     width: double.infinity,
-                        //     decoration: BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: imageProvider,
-                        //         fit: BoxFit.cover,
-                        //         colorFilter: ColorFilter.mode(
-                        //           Colors.black.withOpacity(0.3),
-                        //           BlendMode.darken,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     child: Text(
-                        //       UserDetails.bio,
-                        //       style: TextStyle(
-                        //         fontSize: 20,
-                        //         color: Colors.white,
-                        //         fontWeight: FontWeight.w500,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ),
                       Positioned(
                         top: 125,
-                        left: 20,
+                        left: 30,
                         child: Container(
                           height: 70,
                           width: 70,
@@ -307,62 +279,106 @@ class _ProfileUiState extends State<ProfileUi> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            // width: MediaQuery.of(context).size.width * 0.55,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  UserDetails.userName,
-                                  style: TextStyle(
-                                    color: Colors.blueGrey.shade700,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '@' + UserDetails.userEmail,
-                                  style: TextStyle(
-                                    color: Colors.blue.shade500,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {
-                            PageRouteTransition.push(context, UpdateProfileUi())
-                                .then((value) {
-                              setState(() {});
-                            });
-                          },
-                          elevation: 0,
-                          highlightElevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          color: primaryColor,
-                          child: Text(
-                            'Edit Profile',
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            UserDetails.userName,
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                              color: Colors.blueGrey.shade700,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 15,
+                                child: Text('@'),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                UserDetails.userEmail,
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Flexible(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    PageRouteTransition.push(
+                                            context, UpdateProfileUi())
+                                        .then((value) {
+                                      setState(() {});
+                                    });
+                                  },
+                                  elevation: 0,
+                                  highlightElevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  color: primaryColor,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Edit Profile',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    AuthMethods().logoutuser();
+                                    PageRouteTransition.effect =
+                                        TransitionEffect.leftToRight;
+                                    PageRouteTransition.pushReplacement(
+                                        context, LoginUi());
+                                  },
+                                  elevation: 0,
+                                  highlightElevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  color: Colors.red,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -402,7 +418,7 @@ class _ProfileUiState extends State<ProfileUi> {
                                             Text(
                                               '0',
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.w500,
                                                 color: primaryColor,
                                                 fontSize: 20,
                                               ),
@@ -427,7 +443,7 @@ class _ProfileUiState extends State<ProfileUi> {
                                             snapshot.data.docs.length
                                                 .toString(),
                                             style: TextStyle(
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w500,
                                               color: primaryColor,
                                               fontSize: 20,
                                             ),
@@ -469,7 +485,7 @@ class _ProfileUiState extends State<ProfileUi> {
                                         Text(
                                           ds['following'].length.toString(),
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w500,
                                             color: primaryColor,
                                             fontSize: 20,
                                           ),
@@ -511,7 +527,7 @@ class _ProfileUiState extends State<ProfileUi> {
                                         Text(
                                           ds['followers'].length.toString(),
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w500,
                                             color: primaryColor,
                                             fontSize: 20,
                                           ),
@@ -570,42 +586,6 @@ class _ProfileUiState extends State<ProfileUi> {
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 20,
-                      left: 15,
-                      right: 15,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        AuthMethods().logoutuser();
-                        PageRouteTransition.effect =
-                            TransitionEffect.leftToRight;
-                        PageRouteTransition.pushReplacement(context, LoginUi());
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      color: Colors.red,
-                      elevation: 0,
-                      highlightElevation: 0,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        width: double.infinity,
-                        child: Center(
-                          child: Text(
-                            'Logout',
-                            style: TextStyle(
-                              color: Colors.white,
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
                             ),
                           ),
                         ),

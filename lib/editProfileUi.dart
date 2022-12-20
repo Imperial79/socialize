@@ -1,15 +1,14 @@
-import 'dart:typed_data';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socialize/utilities/sdp.dart';
 
 import 'resources/colors.dart';
 import 'resources/myWidgets.dart';
-import 'resources/pickImage.dart';
-import 'resources/storage_methods.dart';
+import 'services/pickImage.dart';
+import 'services/storage_methods.dart';
 import 'resources/user_details.dart';
 
 class UpdateProfileUi extends StatefulWidget {
@@ -142,62 +141,70 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
     );
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(color: primaryColor, fontWeight: FontWeight.w700),
+        ),
+      ),
       body: SafeArea(
-        bottom: false,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Text(
-                      'EDIT PROFILE',
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontSize: 30,
-                        letterSpacing: 5,
-                        wordSpacing: 3,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
+                  SizedBox(height: 10),
+                  // Expanded(
+                  //   child: Text(
+                  //     'EDIT PROFILE',
+                  //     style: TextStyle(
+                  //       color: primaryColor,
+                  //       fontSize: 30,
+                  //       letterSpacing: 5,
+                  //       wordSpacing: 3,
+                  //       fontWeight: FontWeight.w600,
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: MediaQuery.of(context).size.height * 0.05,
+                  // ),
                   Stack(
+                    alignment: Alignment.bottomRight,
                     children: [
                       _image != null
                           ? CircleAvatar(
-                              radius: 50,
+                              radius: 100,
                               backgroundColor: Colors.blueGrey.shade100,
                               backgroundImage: MemoryImage(_image!),
                             )
                           : CachedNetworkImage(
                               imageUrl: UserDetails.userProfilePic,
                               imageBuilder: (context, image) => CircleAvatar(
-                                radius: 50,
+                                radius: 100,
                                 backgroundColor: Colors.blueGrey.shade100,
                                 backgroundImage: image,
                               ),
                             ),
-                      Positioned(
-                        top: 70,
-                        left: 70,
-                        child: GestureDetector(
-                          onTap: () {
-                            selectImage();
-                          },
-                          child: CircleAvatar(
-                            radius: 15,
-                            backgroundColor: primaryScaffoldColor,
-                            child: Icon(
-                              Icons.edit,
-                              size: 16,
-                            ),
+                      GestureDetector(
+                        onTap: () {
+                          selectImage();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(18),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: primaryAccentColor,
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            color: primaryColor,
+                            size: sdp(context, 16),
                           ),
                         ),
                       ),
@@ -219,45 +226,15 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
                       return null;
                     },
                   ),
-                  // BuildCustomTextField(
-                  //   label: 'Email',
-                  //   obsecureText: false,
-                  //   textCapitalization: TextCapitalization.none,
-                  //   textEditingController: emailController,
-                  //   keyboardType: TextInputType.emailAddress,
-                  //   validator: (value) {
-                  //     return RegExp(
-                  //                 r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")
-                  //             .hasMatch(value!)
-                  //         ? null
-                  //         : "Provide a valid password";
-                  //   },
-                  // ),
-                  // BuildCustomTextField(
-                  //   label: 'Password',
-                  //   obsecureText: true,
-                  //   textCapitalization: TextCapitalization.none,
-                  //   textEditingController: passwordController,
-                  //   keyboardType: TextInputType.text,
-                  //   validator: (value) {
-                  //     if (value!.length < 6) {
-                  //       return 'Password Length must be more than 6 characters';
-                  //     } else if (value.isEmpty) {
-                  //       return 'This Field is required';
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
                   CustomTextField(
                     label: 'Bio',
                     obsecureText: false,
+                    maxLines: 3,
                     textCapitalization: TextCapitalization.sentences,
                     textEditingController: bioController,
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'This Field is required';
-                      }
+                      if (value!.isEmpty) return 'This Field is required';
                       return null;
                     },
                   ),
@@ -269,7 +246,7 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
                       if (!isLoading) updateProfile();
                     },
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     color: primaryColor,
                     elevation: 0,
@@ -290,36 +267,6 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height * 0.15,
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: [
-                  //     Text(
-                  //       'Already have an account? ',
-                  //       style: TextStyle(
-                  //         color: Colors.cyan.shade900,
-                  //         fontWeight: FontWeight.w500,
-                  //       ),
-                  //     ),
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         PageRouteTransition.effect = TransitionEffect.fade;
-                  //         PageRouteTransition.pushReplacement(
-                  //             context, LoginUi());
-                  //       },
-                  //       child: Text(
-                  //         'Login',
-                  //         style: TextStyle(
-                  //           color: primaryColor,
-                  //           fontWeight: FontWeight.w700,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

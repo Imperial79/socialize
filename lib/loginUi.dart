@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_route_transition/page_route_transition.dart';
-
 import 'rootScrUI.dart';
-import 'resources/auth.dart';
+import 'services/auth.dart';
 import 'resources/colors.dart';
 import 'resources/myWidgets.dart';
 import 'registerUI.dart';
@@ -33,7 +30,6 @@ class _LoginUiState extends State<LoginUi> {
 
   logIn() async {
     if (formKey.currentState!.validate()) {
-      //UNFOCUSSING THE TEXTFIELD
       FocusScope.of(context).unfocus();
 
       setState(() {
@@ -43,9 +39,6 @@ class _LoginUiState extends State<LoginUi> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      setState(() {
-        isLoading = false;
-      });
 
       if (res == 'Success') {
         PageRouteTransition.pushReplacement(context, RootScr());
@@ -63,6 +56,9 @@ class _LoginUiState extends State<LoginUi> {
           svgIcon: 'error.svg',
         );
       }
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -78,19 +74,6 @@ class _LoginUiState extends State<LoginUi> {
     );
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage(
-            //     'lib/assets/image/back.jpg',
-            //   ),
-            //   fit: BoxFit.cover,
-            //   opacity: 1,
-            //   colorFilter: ColorFilter.mode(
-            //     Colors.white.withOpacity(0.6),
-            //     BlendMode.lighten,
-            //   ),
-            // ),
-            ),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(20),
@@ -148,9 +131,12 @@ class _LoginUiState extends State<LoginUi> {
                         logIn();
                       }
                     },
-                    label: 'Log In',
+                    child: Visibility(
+                      visible: !isLoading,
+                      child: Text("Log In"),
+                      replacement: CircularProgressIndicator(color: whiteColor),
+                    ),
                     btnColor: primaryColor,
-                    textColor: Colors.white,
                   ),
                   SizedBox(
                     height: 20,

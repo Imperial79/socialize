@@ -5,9 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_route_transition/page_route_transition.dart';
+import 'package:socialize/othersProfileUi.dart';
 import 'package:socialize/postView.dart';
 import 'package:socialize/resources/colors.dart';
 import 'package:socialize/resources/myWidgets.dart';
+import 'package:socialize/utilities/utility.dart';
 
 import 'resources/user_details.dart';
 
@@ -195,6 +197,9 @@ class _SearchUiState extends State<SearchUi> {
 
   Widget UserTile(DocumentSnapshot<Object?> ds) {
     return ListTile(
+      onTap: () {
+        NavPush(context, OthersProfileUi(snap: ds));
+      },
       leading: Stack(
         alignment: Alignment.bottomRight,
         children: [

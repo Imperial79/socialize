@@ -7,14 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
 
 class CustomButton extends StatelessWidget {
-  final label;
+  final child;
   final btnColor;
-  final textColor;
   final press;
   const CustomButton({
     this.btnColor,
-    this.label,
-    this.textColor,
+    this.child,
     this.press,
   });
 
@@ -32,13 +30,7 @@ class CustomButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 15),
         width: double.infinity,
         child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          child: child,
         ),
       ),
     );
@@ -225,13 +217,16 @@ class DummySmallPost extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
+  int? maxLines = 1;
   final label,
       obsecureText,
       textCapitalization,
       textEditingController,
       keyboardType,
       validator;
+
   CustomTextField({
+    this.maxLines,
     this.keyboardType,
     this.label,
     this.obsecureText,
@@ -252,6 +247,7 @@ class CustomTextField extends StatelessWidget {
         cursorColor: primaryColor,
         controller: textEditingController,
         obscureText: obsecureText,
+        maxLines: maxLines,
         textCapitalization: textCapitalization,
         keyboardType: keyboardType,
         style: TextStyle(

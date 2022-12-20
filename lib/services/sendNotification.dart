@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import 'user_details.dart';
+import '../resources/user_details.dart';
 
 Future<Response> sendNotification(
   List<String> tokenIdList,

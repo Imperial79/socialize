@@ -172,6 +172,7 @@ class _ChatsUiState extends State<ChatsUi> {
     );
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Row(
           children: [

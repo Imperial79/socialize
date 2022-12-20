@@ -58,8 +58,10 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 ),
               ),
               CustomButton(
-                label: 'Log in existing account',
-                textColor: Colors.white,
+                child: Text(
+                  'Log in existing account',
+                  style: TextStyle(color: whiteColor),
+                ),
                 btnColor: primaryColor,
                 press: () {
                   Navigator.push(context,
@@ -70,9 +72,11 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 height: 10,
               ),
               CustomButton(
-                label: 'Register for new acocunt',
+                child: Text(
+                  'Register for new acocunt',
+                  style: TextStyle(color: whiteColor),
+                ),
                 btnColor: Colors.grey.shade100,
-                textColor: primaryColor,
                 press: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SignUpUi()));

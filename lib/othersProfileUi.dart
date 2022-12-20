@@ -19,7 +19,6 @@ class OthersProfileUi extends StatefulWidget {
 }
 
 class _OthersProfileUiState extends State<OthersProfileUi> {
-  // QuerySnapshot<Map<String, dynamic>>? thisUser;
   Stream? followStream;
   List followersList = [];
   List? followingList;
@@ -33,7 +32,6 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
   }
 
   onPageLoad() async {
-    //TODO
     await DatabaseMethods()
         .getFollowersAndFollowing(widget.snap['uid'])
         .then((value) {
@@ -54,13 +52,6 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
   }
 
   onFollowBtnClick() async {
-    // await DatabaseMethods()
-    //     .getUserDataFromDatabase(widget.snap['email'])
-    //     .then((value) {
-    //   setState(() {
-    //     thisUser = value;
-    //   });
-    // });
     createPersonalChatRoom(
       friendDp: widget.snap['profilePhoto'],
       friendName: widget.snap['username'],
@@ -157,7 +148,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
           .where('postImage', isNotEqualTo: '')
           .get(),
       builder: (context, snapshot) {
-        if (snapshot.data == null) {
+        if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(
               color: primaryColor,
@@ -174,7 +165,6 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
             children: List.generate(
               snapshot.data.docs.length,
               (index) {
-                print(index);
                 DocumentSnapshot ds = snapshot.data.docs[index];
                 return ds['postImage'] == ''
                     ? Container()
@@ -205,7 +195,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: Colors.transparent,
       ),
     );
     return Scaffold(
@@ -245,10 +235,10 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                         height: 205,
                       ),
                       Container(
+                        margin: EdgeInsets.all(10),
                         alignment: Alignment.topLeft,
                         height: 160,
                         width: double.infinity,
-                        decoration: BoxDecoration(),
                         child: CachedNetworkImage(
                           imageUrl:
                               'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',
@@ -259,6 +249,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                             padding: EdgeInsets.all(20),
                             width: double.infinity,
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
@@ -281,7 +272,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                       ),
                       Positioned(
                         top: 125,
-                        left: 20,
+                        left: 30,
                         child: ds['profilePhoto'] == ''
                             ? CircularProgressIndicator()
                             : CachedNetworkImage(
@@ -291,12 +282,12 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                                   width: 70,
                                   decoration: BoxDecoration(
                                     color: primaryScaffoldColor,
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
                                       color: ds['active'] == '1'
                                           ? Colors.green
                                           : Colors.red,
-                                      width: 4,
+                                      width: 2,
                                     ),
                                     image: DecorationImage(
                                       image: image,
@@ -412,7 +403,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                     color: Colors.grey.shade400,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

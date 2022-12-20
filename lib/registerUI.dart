@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_route_transition/page_route_transition.dart';
-import 'package:socialize/resources/auth.dart';
-import 'package:socialize/resources/pickImage.dart';
+import 'package:socialize/services/auth.dart';
+import 'package:socialize/services/pickImage.dart';
 
 import 'rootScrUI.dart';
 import 'loginUi.dart';

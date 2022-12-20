@@ -61,16 +61,13 @@ class _FeedCardState extends State<FeedCard> {
   bool isLikeAnimating = false;
   @override
   Widget build(BuildContext context) {
-    final scaffoldColor = isDarkMode ? Colors.grey.shade900 : Colors.white;
-
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness:
             isDarkMode ? Brightness.light : Brightness.dark,
-        statusBarColor: isDarkMode ? Colors.grey.shade900 : Colors.transparent,
-        systemNavigationBarColor:
-            isDarkMode ? Colors.grey.shade900 : Colors.white,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
       ),
     );
     return Container(
@@ -86,7 +83,7 @@ class _FeedCardState extends State<FeedCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+            padding: EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -134,7 +131,7 @@ class _FeedCardState extends State<FeedCard> {
                                         ? 'You'
                                         : widget.snap['username'],
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       color: isDarkMode
                                           ? Colors.white
@@ -151,7 +148,7 @@ class _FeedCardState extends State<FeedCard> {
                                                 : ' shared a file',
                                     style: TextStyle(
                                       color: Colors.grey.shade500,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -176,80 +173,50 @@ class _FeedCardState extends State<FeedCard> {
                     ),
                   ],
                 ),
-                widget.snap['uid'] == UserDetails.uid
-                    ? IconButton(
-                        onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) => Dialog(
-                          //     child: ListView(
-                          //       padding: EdgeInsets.symmetric(vertical: 16),
-                          //       shrinkWrap: true,
-                          //       children: [
-                          //         'Delete',
-                          //       ]
-                          //           .map(
-                          //             (e) => InkWell(
-                          //               onTap: () {
-                          //                 deletePost();
-                          //                 Navigator.pop(context);
-                          //               },
-                          //               child: Container(
-                          //                 padding: EdgeInsets.all(15),
-                          //                 child: Text(
-                          //                   e,
-                          //                   style: TextStyle(
-                          //                     color: Colors.grey.shade600,
-                          //                     fontWeight: FontWeight.w500,
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //           )
-                          //           .toList(),
-                          //     ),
-                          //   ),
-                          // );
-
-                          ///////////////////////////////////
-                          final RelativeRect position =
-                              buttonMenuPosition(context);
-                          showMenu(
-                            elevation: 2,
-                            color: Colors.grey.shade200,
-                            context: context,
-                            position: position,
-                            items: [
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
+                Flexible(
+                  child: Visibility(
+                    visible: widget.snap['uid'] == UserDetails.uid,
+                    child: IconButton(
+                      onPressed: () {
+                        final RelativeRect position =
+                            buttonMenuPosition(context);
+                        showMenu(
+                          elevation: 2,
+                          color: Colors.grey.shade200,
+                          context: context,
+                          position: position,
+                          items: [
+                            PopupMenuItem<int>(
+                              value: 0,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Delete',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey.shade600,
                                     ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Delete',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          );
-                        },
-                        icon: Icon(
-                          Icons.more_horiz,
-                          color: Colors.grey.shade500,
-                        ),
-                      )
-                    : Container(),
+                            ),
+                          ],
+                        );
+                      },
+                      icon: Icon(
+                        Icons.more_horiz,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -262,9 +229,9 @@ class _FeedCardState extends State<FeedCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Visibility(
-                  visible: widget.snap['description'] != '' ? true : false,
+                  visible: widget.snap['description'] != '',
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
                     child: Text(
                       widget.snap['description'],
                       style: TextStyle(
@@ -398,7 +365,7 @@ class _FeedCardState extends State<FeedCard> {
                                   //   '12mb',
                                   //   style: TextStyle(
                                   //     color: Colors.grey,
-                                  //     fontWeight: FontWeight.w600,
+                                  //     fontWeight: FontWeight.w500,
                                   //   ),
                                   // ),
                                 ],
@@ -436,7 +403,7 @@ class _FeedCardState extends State<FeedCard> {
                                       'Download',
                                       style: TextStyle(
                                         color: primaryColor,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                         fontSize: 17,
                                       ),
                                     ),
@@ -486,7 +453,7 @@ class _FeedCardState extends State<FeedCard> {
                               ? '${widget.snap['likes'].length} Like'
                               : '${widget.snap['likes'].length} Likes',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             letterSpacing: 1,
                             color: Colors.grey.shade100,
                             fontSize: 12,
@@ -515,7 +482,7 @@ class _FeedCardState extends State<FeedCard> {
                                   return Text(
                                     '0 Comments',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.grey.shade500,
                                       fontSize: 12,
                                     ),
@@ -525,7 +492,7 @@ class _FeedCardState extends State<FeedCard> {
                                   snapshot.data.docs.length.toString() +
                                       ' Comments',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.grey.shade500,
                                     fontSize: 12,
                                   ),
