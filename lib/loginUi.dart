@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_route_transition/page_route_transition.dart';
+import 'package:socialize/utilities/sdp.dart';
 import 'rootScrUI.dart';
 import 'services/auth.dart';
 import 'resources/colors.dart';
@@ -42,12 +43,6 @@ class _LoginUiState extends State<LoginUi> {
 
       if (res == 'Success') {
         PageRouteTransition.pushReplacement(context, RootScr());
-        showSnackBar(
-          context,
-          content: 'Success',
-          color: Colors.green.shade800,
-          svgIcon: 'success.svg',
-        );
       } else {
         showSnackBar(
           context,
@@ -84,12 +79,14 @@ class _LoginUiState extends State<LoginUi> {
                 children: [
                   Expanded(
                     child: Center(
-                      child: Text(
-                        'Log In',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 70,
-                          fontWeight: FontWeight.w600,
+                      child: FittedBox(
+                        child: Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 70,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
@@ -97,6 +94,7 @@ class _LoginUiState extends State<LoginUi> {
                   CustomTextField(
                     label: 'Email',
                     obsecureText: false,
+                    maxLines: 1,
                     keyboardType: TextInputType.emailAddress,
                     textCapitalization: TextCapitalization.none,
                     textEditingController: emailController,
@@ -110,6 +108,7 @@ class _LoginUiState extends State<LoginUi> {
                   CustomTextField(
                     label: 'Password',
                     obsecureText: true,
+                    maxLines: 1,
                     keyboardType: TextInputType.number,
                     textCapitalization: TextCapitalization.none,
                     textEditingController: passwordController,
@@ -133,7 +132,11 @@ class _LoginUiState extends State<LoginUi> {
                     },
                     child: Visibility(
                       visible: !isLoading,
-                      child: Text("Log In"),
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                            color: whiteColor, fontSize: sdp(context, 15)),
+                      ),
                       replacement: CircularProgressIndicator(color: whiteColor),
                     ),
                     btnColor: primaryColor,
@@ -145,23 +148,12 @@ class _LoginUiState extends State<LoginUi> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(6),
-                            topLeft: Radius.circular(6),
-                          ),
-                        ),
-                        child: Text(
-                          'No account? ',
-                          style: TextStyle(
-                            color: Colors.grey.shade600,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 12,
-                          ),
+                      Text(
+                        'No account? ',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w600,
+                          fontSize: sdp(context, 12),
                         ),
                       ),
                       InkWell(
@@ -177,19 +169,14 @@ class _LoginUiState extends State<LoginUi> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
                             color: primaryColor,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6),
-                              bottomRight: Radius.circular(6),
-                            ),
+                            borderRadius: BorderRadius.circular(100),
                           ),
                           child: Text(
                             'Sign up',
                             style: TextStyle(
                               color: Colors.white,
-                              letterSpacing: 1.6,
                               fontSize: 12,
-                              fontWeight: FontWeight.w800,
-                              // fontFamily: 'default',
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),

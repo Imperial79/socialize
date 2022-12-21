@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:socialize/chatsUi.dart';
 import 'package:socialize/homeUI.dart';
 import 'package:socialize/resources/user_details.dart';
@@ -127,7 +126,6 @@ class _RootScrState extends State<RootScr> with WidgetsBindingObserver {
 
   Widget _buildBottomBar(List<Widget> items) {
     return NavigationBar(
-      height: 65,
       onDestinationSelected: (int index) {
         setState(() {
           selectedScreen = index;

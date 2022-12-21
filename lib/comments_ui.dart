@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:socialize/utilities/sdp.dart';
 
 import 'resources/colors.dart';
 import 'resources/database.dart';
@@ -101,60 +102,36 @@ class _CommentsUiState extends State<CommentsUi> {
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Color(0xfff2f7fa),
+        systemNavigationBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: false,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: SvgPicture.asset(
-      //       'lib/assets/image/back.svg',
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   elevation: 0,
-      //   backgroundColor: primaryColor,
-      //   title: Text(
-      //     'Comments',
-      //     style: TextStyle(
-      //       color: Colors.white,
-      //       fontWeight: FontWeight.w500,
-      //       fontSize: 18,
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+        centerTitle: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(
+            'lib/assets/image/back.svg',
+            color: Colors.white,
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: primaryColor,
+        title: Text(
+          'Comments',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: SvgPicture.asset(
-                      'lib/assets/image/back.svg',
-                      color: primaryColor,
-                    ),
-                  ),
-                  Text(
-                    'Comments',
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -166,7 +143,7 @@ class _CommentsUiState extends State<CommentsUi> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              padding: EdgeInsets.all(10),
+              // padding: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 border: Border.all(color: Colors.grey.shade400, width: 1),
@@ -185,7 +162,8 @@ class _CommentsUiState extends State<CommentsUi> {
                       maxLines: 5,
                       minLines: 1,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        contentPadding:
+                            EdgeInsets.only(left: 30, bottom: 10, top: 10),
                         hintText: 'Comment as ' + UserDetails.userName,
                         border: InputBorder.none,
                       ),
@@ -216,9 +194,7 @@ class _CommentsUiState extends State<CommentsUi> {
     );
   }
 
-  Widget BuildCommentCard({
-    required DocumentSnapshot snap,
-  }) {
+  Widget BuildCommentCard({required DocumentSnapshot snap}) {
     return Container(
       padding: EdgeInsets.only(left: 15, top: 20, right: 15),
       width: double.infinity,
@@ -243,41 +219,37 @@ class _CommentsUiState extends State<CommentsUi> {
           SizedBox(
             width: 10,
           ),
-          Expanded(
-            flex: 5,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: snap['username'] + ' ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      TextSpan(
-                        text: snap['comment'],
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    snap['username'],
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: sdp(context, 12),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  DateFormat.yMMMd().format(snap['time'].toDate()),
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey.shade600,
+                  Text(snap['comment']),
+                  SizedBox(
+                    height: 5,
                   ),
-                ),
-              ],
+                  Text(
+                    DateFormat.yMMMd().format(snap['time'].toDate()),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         ],

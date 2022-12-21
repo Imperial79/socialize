@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socialize/utilities/sdp.dart';
 
 import 'resources/colors.dart';
 import 'resources/database.dart';
@@ -29,100 +30,104 @@ class _AddStoryUiState extends State<AddStoryUi> {
 
   selectPhoto(BuildContext context) {
     return showModalBottomSheet(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
-      ),
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
       context: context,
       builder: (context) {
-        return Container(
-          height: 170,
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Select Image',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
+        return SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            margin: EdgeInsets.all(20),
+            height: sdp(context, 150),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Select Image',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          Navigator.pop(context);
-                          Uint8List file = await pickImage(ImageSource.gallery);
-                          setState(() {
-                            _file = file;
-                          });
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xFFFCE0EA),
-                          radius: 30,
-                          child: SvgPicture.asset(
-                            'lib/assets/image/picture.svg',
-                            color: Colors.pink.shade600,
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            Navigator.pop(context);
+                            Uint8List file =
+                                await pickImage(ImageSource.gallery);
+                            setState(() {
+                              _file = file;
+                            });
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xFFFCE0EA),
+                            radius: 30,
+                            child: SvgPicture.asset(
+                              'lib/assets/image/picture.svg',
+                              color: Colors.pink.shade600,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Text(
-                        'Gallery',
-                        style: TextStyle(
-                          color: Colors.grey.shade800,
-                          fontWeight: FontWeight.w500,
+                        SizedBox(
+                          height: 7,
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          Navigator.pop(context);
-                          Uint8List file = await pickImage(ImageSource.camera);
-                          setState(() {
-                            _file = file;
-                          });
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: Color.fromARGB(255, 220, 239, 255),
-                          radius: 30,
-                          child: SvgPicture.asset(
-                            'lib/assets/image/camera.svg',
-                            color: Colors.blue.shade600,
+                        Text(
+                          'Gallery',
+                          style: TextStyle(
+                            color: Colors.grey.shade800,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Text(
-                        'Camera',
-                        style: TextStyle(
-                          color: Colors.grey.shade800,
-                          fontWeight: FontWeight.w500,
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            Navigator.pop(context);
+                            Uint8List file =
+                                await pickImage(ImageSource.camera);
+                            setState(() {
+                              _file = file;
+                            });
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color.fromARGB(255, 220, 239, 255),
+                            radius: 30,
+                            child: SvgPicture.asset(
+                              'lib/assets/image/camera.svg',
+                              color: Colors.blue.shade600,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          'Camera',
+                          style: TextStyle(
+                            color: Colors.grey.shade800,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -290,7 +295,7 @@ class _AddStoryUiState extends State<AddStoryUi> {
             uploadStory();
           },
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(100),
           ),
           color: primaryColor,
           elevation: 0,

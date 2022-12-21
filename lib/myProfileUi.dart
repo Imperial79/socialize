@@ -189,234 +189,259 @@ class _ProfileUiState extends State<ProfileUi> {
       ),
     );
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              'lib/assets/image/profile_filled.svg',
-              height: 20,
-              color: primaryColor,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'PROFILE',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: primaryColor,
-                letterSpacing: 10,
-                fontSize: 20,
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: UserDetails.uid == ''
-          ? Center(
-              child: CircularProgressIndicator(
-                color: primaryColor,
-              ),
-            )
-          : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 205,
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(20),
-                        height: 160,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   automaticallyImplyLeading: false,
+      //   title: Row(
+      //     children: [
+      //       SvgPicture.asset(
+      //         'lib/assets/image/profile_filled.svg',
+      //         height: 20,
+      //         color: primaryColor,
+      //       ),
+      //       SizedBox(
+      //         width: 10,
+      //       ),
+      //       Text(
+      //         'PROFILE',
+      //         style: TextStyle(
+      //           fontWeight: FontWeight.w700,
+      //           color: primaryColor,
+      //           letterSpacing: 10,
+      //           fontSize: 20,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      body: SafeArea(
+        child: UserDetails.uid == ''
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: primaryColor,
+                ),
+              )
+            : SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 205,
                         ),
-                        child: Text(
-                          UserDetails.bio,
-                          style: TextStyle(
-                            fontSize: UserDetails.bio.length > 100 ? 20 : 40,
-                            color: Colors.grey.shade400,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 125,
-                        left: 30,
-                        child: Container(
-                          height: 70,
-                          width: 70,
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(20),
+                          height: 160,
+                          width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Color(0xfff2f7fa),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Color(0xfff2f7fa),
-                              width: 3.5,
-                            ),
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: UserDetails.userProfilePic == ''
-                                ? CircularProgressIndicator(
-                                    color: primaryColor,
-                                  )
-                                : CachedNetworkImage(
-                                    imageUrl: UserDetails.userProfilePic,
-                                    fit: BoxFit.cover,
-                                  ),
+                          child: Text(
+                            UserDetails.bio,
+                            style: TextStyle(
+                              fontSize: UserDetails.bio.length > 100 ? 20 : 40,
+                              color: Colors.grey.shade400,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            UserDetails.userName,
-                            style: TextStyle(
-                              color: Colors.blueGrey.shade700,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                        Positioned(
+                          top: 125,
+                          left: 30,
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: Color(0xfff2f7fa),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Color(0xfff2f7fa),
+                                width: 3.5,
+                              ),
                             ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: UserDetails.userProfilePic == ''
+                                  ? CircularProgressIndicator(
+                                      color: primaryColor,
+                                    )
+                                  : CachedNetworkImage(
+                                      imageUrl: UserDetails.userProfilePic,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
                           ),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 15,
-                                child: Text('@'),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              UserDetails.userName,
+                              style: TextStyle(
+                                color: Colors.blueGrey.shade700,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                UserDetails.userEmail,
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 15,
+                                  child: Text('@'),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Flexible(
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    PageRouteTransition.push(
-                                            context, UpdateProfileUi())
-                                        .then((value) {
-                                      setState(() {});
-                                    });
-                                  },
-                                  elevation: 0,
-                                  highlightElevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(7),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  UserDetails.userEmail,
+                                  style: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  color: primaryColor,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      'Edit Profile',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      PageRouteTransition.push(
+                                              context, UpdateProfileUi())
+                                          .then((value) {
+                                        setState(() {});
+                                      });
+                                    },
+                                    elevation: 0,
+                                    highlightElevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                    color: primaryColor,
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: Text(
+                                        'Edit Profile',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    AuthMethods().logoutuser();
-                                    PageRouteTransition.effect =
-                                        TransitionEffect.leftToRight;
-                                    PageRouteTransition.pushReplacement(
-                                        context, LoginUi());
-                                  },
-                                  elevation: 0,
-                                  highlightElevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                  ),
-                                  color: Colors.red,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      'Logout',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      AuthMethods().logoutuser();
+                                      PageRouteTransition.effect =
+                                          TransitionEffect.leftToRight;
+                                      PageRouteTransition.pushReplacement(
+                                          context, LoginUi());
+                                    },
+                                    elevation: 0,
+                                    highlightElevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                    color: Colors.red,
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.right,
                                       ),
-                                      textAlign: TextAlign.right,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  StreamBuilder<dynamic>(
-                    stream: FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(UserDetails.uid)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        DocumentSnapshot ds = snapshot.data;
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: primaryAccentColor,
-                                  ),
-                                  child: StreamBuilder<dynamic>(
-                                    stream: FirebaseFirestore.instance
-                                        .collection('posts')
-                                        .where('uid',
-                                            isEqualTo: UserDetails.uid)
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
+                    SizedBox(
+                      height: 10,
+                    ),
+                    StreamBuilder<dynamic>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(UserDetails.uid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          DocumentSnapshot ds = snapshot.data;
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: primaryAccentColor,
+                                    ),
+                                    child: StreamBuilder<dynamic>(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('posts')
+                                          .where('uid',
+                                              isEqualTo: UserDetails.uid)
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return Column(
+                                            children: [
+                                              Text(
+                                                '0',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: primaryColor,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Posts',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: primaryColor,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }
                                         return Column(
                                           children: [
                                             Text(
-                                              '0',
+                                              snapshot.data.docs.length
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 color: primaryColor,
@@ -431,17 +456,33 @@ class _ProfileUiState extends State<ProfileUi> {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w900,
                                                 color: primaryColor,
-                                                letterSpacing: 1,
                                               ),
                                             ),
                                           ],
                                         );
-                                      }
-                                      return Column(
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      PageRouteTransition.push(
+                                          context, FollowingUi());
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: primaryAccentColor,
+                                      ),
+                                      child: Column(
                                         children: [
                                           Text(
-                                            snapshot.data.docs.length
-                                                .toString(),
+                                            ds['following'].length.toString(),
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               color: primaryColor,
@@ -452,153 +493,109 @@ class _ProfileUiState extends State<ProfileUi> {
                                             height: 5,
                                           ),
                                           Text(
-                                            'Posts',
+                                            'Following',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w900,
                                               color: primaryColor,
-                                              letterSpacing: 1,
                                             ),
                                           ),
                                         ],
-                                      );
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      PageRouteTransition.push(
+                                          context, FollowersUi());
                                     },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    PageRouteTransition.push(
-                                        context, FollowingUi());
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: primaryAccentColor,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          ds['following'].length.toString(),
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: primaryColor,
-                                            fontSize: 20,
+                                    child: Container(
+                                      padding: EdgeInsets.all(15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: primaryAccentColor,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          // FollowerCount(),
+                                          Text(
+                                            ds['followers'].length.toString(),
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: primaryColor,
+                                              fontSize: 20,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          'Following',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            color: primaryColor,
-                                            letterSpacing: 1,
+                                          SizedBox(
+                                            height: 5,
                                           ),
-                                        ),
-                                      ],
+                                          Text(
+                                            'Followers',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              color: primaryColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    PageRouteTransition.push(
-                                        context, FollowersUi());
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: primaryAccentColor,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        // FollowerCount(),
-                                        Text(
-                                          ds['followers'].length.toString(),
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: primaryColor,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          'Followers',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            color: primaryColor,
-                                            letterSpacing: 1,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          );
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
                           ),
                         );
-                      }
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
-                        ),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 20,
-                      top: 10,
-                      left: 15,
-                      right: 15,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        PageRouteTransition.push(context, AddStoryUi());
                       },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 20,
+                        top: 10,
+                        left: 15,
+                        right: 15,
                       ),
-                      color: primaryColor,
-                      elevation: 0,
-                      highlightElevation: 0,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        width: double.infinity,
-                        child: Center(
-                          child: Text(
-                            'Add to Story',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1,
+                      child: MaterialButton(
+                        onPressed: () {
+                          PageRouteTransition.push(context, AddStoryUi());
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        color: primaryColor,
+                        elevation: 0,
+                        highlightElevation: 0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          width: double.infinity,
+                          child: Center(
+                            child: Text(
+                              'Add to Story',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: PostList(),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: PostList(),
+                    ),
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }

@@ -74,7 +74,10 @@ class _WelcomeUIState extends State<WelcomeUI> {
               CustomButton(
                 child: Text(
                   'Register for new acocunt',
-                  style: TextStyle(color: whiteColor),
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 btnColor: Colors.grey.shade100,
                 press: () {

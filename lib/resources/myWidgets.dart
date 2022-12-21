@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
     return MaterialButton(
       onPressed: press,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(100),
       ),
       color: btnColor,
       elevation: 0,
@@ -271,7 +271,7 @@ class CustomTextField extends StatelessWidget {
           labelText: label,
           labelStyle: TextStyle(
             color: primaryColor,
-            letterSpacing: 1,
+            letterSpacing: 0,
             fontWeight: FontWeight.w600,
           ),
         ),
