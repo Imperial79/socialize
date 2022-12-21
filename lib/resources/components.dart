@@ -53,7 +53,7 @@ void downloadFile(String url, BuildContext context) async {
             "Success!! Saved to documents/Socialize",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: whiteColor,
             ),
           ),
           backgroundColor: Colors.green,
@@ -67,7 +67,7 @@ void downloadFile(String url, BuildContext context) async {
             "Failed!! Storage Access Denied",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: whiteColor,
             ),
           ),
           backgroundColor: Colors.red,
@@ -82,7 +82,7 @@ void downloadFile(String url, BuildContext context) async {
           "Failed!! Please check your internet connection",
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: whiteColor,
           ),
         ),
         backgroundColor: Colors.red,

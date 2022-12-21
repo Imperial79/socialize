@@ -23,7 +23,6 @@ class SearchUi extends StatefulWidget {
 class _SearchUiState extends State<SearchUi> {
   final searchController = TextEditingController();
   bool isShowUsers = false;
-  bool _searchBoxShow = false;
 
   @override
   void dispose() {
@@ -33,21 +32,10 @@ class _SearchUiState extends State<SearchUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness:
-            isDarkMode ? Brightness.light : Brightness.dark,
-        statusBarColor: isDarkMode ? Colors.grey.shade900 : Colors.transparent,
-        systemNavigationBarColor:
-            isDarkMode ? Colors.grey.shade900 : Colors.white,
-      ),
-    );
-
     searchController.text == '' ? isShowUsers = false : true;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         toolbarHeight: 75,
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -60,7 +48,7 @@ class _SearchUiState extends State<SearchUi> {
           child: Row(
             children: [
               SvgPicture.asset(
-                'lib/assets/image/search_filled.svg',
+                'lib/assets/image/search.svg',
                 color: primaryColor,
                 height: 17,
               ),
@@ -78,10 +66,8 @@ class _SearchUiState extends State<SearchUi> {
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Search...',
+                    hintText: 'Search username, @s,. etc',
                     hintStyle: TextStyle(
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w800,
                       color: primaryColor.withOpacity(0.5),
                     ),
                   ),
@@ -218,7 +204,7 @@ class _SearchUiState extends State<SearchUi> {
           ),
           CircleAvatar(
             radius: 7,
-            backgroundColor: Colors.white,
+            backgroundColor: whiteColor,
             child: CircleAvatar(
               radius: 5,
               backgroundColor: ds['active'] == '1' ? Colors.green : Colors.red,

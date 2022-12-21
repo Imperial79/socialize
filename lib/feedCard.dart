@@ -61,15 +61,6 @@ class _FeedCardState extends State<FeedCard> {
   bool isLikeAnimating = false;
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness:
-            isDarkMode ? Brightness.light : Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: double.infinity,
@@ -134,7 +125,7 @@ class _FeedCardState extends State<FeedCard> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       color: isDarkMode
-                                          ? Colors.white
+                                          ? whiteColor
                                           : Colors.grey.shade700,
                                     ),
                                   ),
@@ -295,7 +286,7 @@ class _FeedCardState extends State<FeedCard> {
                           child: LikeAnimation(
                             child: SvgPicture.asset(
                               'lib/assets/image/like_filled.svg',
-                              color: Colors.white,
+                              color: whiteColor,
                               height: 100,
                             ),
                             isAnimating: isLikeAnimating,

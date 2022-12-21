@@ -52,7 +52,7 @@ showSnackBar(
       content: Text(
         content,
         style: TextStyle(
-          color: Colors.white,
+          color: whiteColor,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -99,7 +99,7 @@ class DummyPostCard extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: whiteColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -112,7 +112,7 @@ class DummyPostCard extends StatelessWidget {
                     width: 200,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+                      color: whiteColor.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -121,7 +121,7 @@ class DummyPostCard extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+                      color: whiteColor.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     width: 200,
@@ -147,7 +147,7 @@ class DummyPostCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: whiteColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),

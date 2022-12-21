@@ -144,14 +144,6 @@ class _CoversationRoomUiState extends State<CoversationRoomUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: primaryScaffoldColor,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
@@ -205,7 +197,7 @@ class _CoversationRoomUiState extends State<CoversationRoomUi> {
                         Text(
                           ds['username'],
                           style: TextStyle(
-                            color: Colors.white,
+                            color: whiteColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -243,7 +235,7 @@ class _CoversationRoomUiState extends State<CoversationRoomUi> {
         ),
         actions: [
           PopupMenuButton(
-            color: Colors.white,
+            color: whiteColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

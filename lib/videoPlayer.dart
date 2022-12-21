@@ -42,18 +42,10 @@ class _VideoPlayerUiState extends State<VideoPlayerUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: isFullscreen ? Colors.black : Colors.white,
-        systemNavigationBarColor: isFullscreen ? Colors.black : Colors.white,
-      ),
-    );
     final isMuted = controller.value.volume == 0;
     return controller != null && controller.value.isInitialized
         ? Scaffold(
-            backgroundColor: isFullscreen ? Colors.black : Colors.white,
+            backgroundColor: isFullscreen ? Colors.black : whiteColor,
             body: isFullscreen
                 ? Center(child: BuildVideo())
                 : Column(
@@ -117,7 +109,7 @@ class _VideoPlayerUiState extends State<VideoPlayerUi> {
                 },
                 icon: Icon(
                   isFullscreen ? Icons.fullscreen_exit : Icons.fullscreen,
-                  color: Colors.white,
+                  color: whiteColor,
                 ),
               ),
             ),
@@ -169,7 +161,7 @@ class BasicOverlayWidget extends StatelessWidget {
             color: Colors.black.withOpacity(0.3),
             child: Icon(
               Icons.play_arrow,
-              color: Colors.white.withOpacity(0.7),
+              color: whiteColor.withOpacity(0.7),
               size: 80,
             ),
           );

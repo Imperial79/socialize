@@ -7,6 +7,7 @@ import 'package:socialize/homeUI.dart';
 import 'package:socialize/resources/user_details.dart';
 import 'package:socialize/utilities/animated_indexed_stack.dart';
 import 'myProfileUi.dart';
+import 'resources/colors.dart';
 import 'searchUi.dart';
 
 class RootScr extends StatefulWidget {
@@ -22,7 +23,6 @@ class _RootScrState extends State<RootScr> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-
     super.initState();
   }
 
@@ -44,19 +44,12 @@ class _RootScrState extends State<RootScr> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
-
     return Scaffold(
-      backgroundColor: Colors.white,
       body: getBody(),
-      bottomNavigationBar: getFooter(),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        child: getFooter(),
+      ),
     );
   }
 
@@ -133,7 +126,7 @@ class _RootScrState extends State<RootScr> with WidgetsBindingObserver {
         FocusScope.of(context).unfocus();
       },
       selectedIndex: selectedScreen,
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
       animationDuration: Duration(milliseconds: 200),
       destinations: items,

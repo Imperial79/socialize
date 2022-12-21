@@ -59,14 +59,6 @@ class _LoginUiState extends State<LoginUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
       body: Container(
         child: SafeArea(
@@ -174,7 +166,7 @@ class _LoginUiState extends State<LoginUi> {
                           child: Text(
                             'Sign up',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: whiteColor,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),

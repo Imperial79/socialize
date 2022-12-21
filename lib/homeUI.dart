@@ -138,7 +138,7 @@ class _HomeUIState extends State<HomeUI> {
           margin: EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
+            color: whiteColor,
           ),
           height: MediaQuery.of(context).size.height * 0.25,
           padding: EdgeInsets.all(20),
@@ -442,7 +442,7 @@ class _HomeUIState extends State<HomeUI> {
                 child: DummyPostCard(),
                 gradient: LinearGradient(
                   colors: [
-                    Colors.white,
+                    whiteColor,
                     Colors.grey.shade300,
                   ],
                 ),
@@ -549,7 +549,7 @@ class _HomeUIState extends State<HomeUI> {
                 gradient: LinearGradient(
                   colors: [
                     Colors.grey,
-                    Colors.white,
+                    whiteColor,
                   ],
                 ),
               );
@@ -559,17 +559,9 @@ class _HomeUIState extends State<HomeUI> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         automaticallyImplyLeading: false,
         title: Text(
           'Socialize',
@@ -587,7 +579,7 @@ class _HomeUIState extends State<HomeUI> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 10),
               width: double.infinity,
-              color: isDarkMode ? Colors.grey.shade900 : Colors.white,
+              color: isDarkMode ? Colors.grey.shade900 : whiteColor,
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -643,7 +635,7 @@ class _HomeUIState extends State<HomeUI> {
                                                 child: Container(
                                                   padding: EdgeInsets.all(7),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.white,
+                                                    color: whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             7),
@@ -660,7 +652,7 @@ class _HomeUIState extends State<HomeUI> {
                                               Text(
                                                 'Add Story',
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: whiteColor,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -680,92 +672,88 @@ class _HomeUIState extends State<HomeUI> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              // margin: EdgeInsets.only(bottom: 0),
-              color: isDarkMode ? Colors.grey.shade900 : Colors.white,
+            Padding(
+              padding: EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: isDarkMode
-                                  ? Colors.grey.shade700
-                                  : Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(5),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? Colors.grey.shade700
+                                : Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: TextFormField(
+                            controller: descriptionController,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
                             ),
-                            child: TextFormField(
-                              controller: descriptionController,
-                              keyboardType: TextInputType.text,
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
+                            textCapitalization: TextCapitalization.sentences,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Write Something...',
+                              hintStyle: TextStyle(
+                                color: isDarkMode
+                                    ? Colors.grey
+                                    : Colors.grey.shade400,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                              textCapitalization: TextCapitalization.sentences,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Post Something...',
-                                hintStyle: TextStyle(
-                                  color: isDarkMode
-                                      ? Colors.grey
-                                      : Colors.grey.shade400,
-                                  fontWeight: FontWeight.w500,
-                                ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        isLoading
-                            ? Container()
-                            : MaterialButton(
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                  if (_file != null ||
-                                      (_file == null &&
-                                          docFile == null &&
-                                          videoFile == null &&
-                                          descriptionController
-                                              .text.isNotEmpty)) {
-                                    onPostButtonClick();
-                                  }
-                                  if (docFile != null) {
-                                    uploadDocFile();
-                                  }
-                                  if (videoFile != null) {
-                                    uploadVideoFile();
-                                  }
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                color: primaryColor,
-                                elevation: 0,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 20,
-                                ),
-                                child: Text(
-                                  'Post',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      isLoading
+                          ? Container()
+                          : MaterialButton(
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                if (_file != null ||
+                                    (_file == null &&
+                                        docFile == null &&
+                                        videoFile == null &&
+                                        descriptionController
+                                            .text.isNotEmpty)) {
+                                  onPostButtonClick();
+                                }
+                                if (docFile != null) {
+                                  uploadDocFile();
+                                }
+                                if (videoFile != null) {
+                                  uploadVideoFile();
+                                }
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              color: primaryColor,
+                              elevation: 0,
+                              padding: EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 20,
+                              ),
+                              child: Text(
+                                'Post',
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
                                 ),
                               ),
-                      ],
-                    ),
+                            ),
+                    ],
                   ),
+                  SizedBox(height: 10),
                   isLoading
                       ? Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
@@ -858,8 +846,7 @@ class _HomeUIState extends State<HomeUI> {
                                 child: Icon(
                                   Icons.close,
                                   size: 20,
-                                  color:
-                                      isDarkMode ? Colors.white : Colors.black,
+                                  color: isDarkMode ? whiteColor : Colors.black,
                                 ),
                               ),
                             ],
@@ -911,7 +898,7 @@ class _HomeUIState extends State<HomeUI> {
                                       _controller.value.isPlaying
                                           ? Icons.pause
                                           : Icons.play_arrow,
-                                      color: Colors.white,
+                                      color: whiteColor,
                                     ),
                                   ),
                                 ),
@@ -927,7 +914,7 @@ class _HomeUIState extends State<HomeUI> {
                                 },
                                 icon: Icon(
                                   Icons.close,
-                                  color: Colors.white,
+                                  color: whiteColor,
                                 ),
                               ),
                             ),
@@ -936,58 +923,61 @@ class _HomeUIState extends State<HomeUI> {
                   task != null && docFile != null
                       ? buildUploadStatus(task!)
                       : Container(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PostTypeButton(
-                          context,
-                          press: () {
-                            selectPhoto(context);
-                          },
-                          btnColor: Colors.pink.withOpacity(0.15),
-                          image: SvgPicture.asset(
-                            'lib/assets/image/picture.svg',
-                            color: Colors.pink,
-                            height: 15,
-                          ),
-                          label: 'Photo',
-                          labelColor: Colors.pink,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PostTypeButton(
+                        context,
+                        press: () {
+                          selectPhoto(context);
+                        },
+                        btnColor: Colors.pink.withOpacity(0.15),
+                        image: SvgPicture.asset(
+                          'lib/assets/image/picture.svg',
+                          color: Colors.pink,
+                          height: 15,
                         ),
-                        PostTypeButton(
-                          context,
-                          press: () {
-                            pickVideo();
-                          },
-                          btnColor: primaryAccentColor,
-                          image: Icon(
-                            Icons.videocam,
-                            color: primaryColor,
-                          ),
-                          label: 'Video',
-                          labelColor: primaryColor,
+                        label: 'Photo',
+                        labelColor: Colors.pink,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      PostTypeButton(
+                        context,
+                        press: () {
+                          pickVideo();
+                        },
+                        btnColor: primaryAccentColor,
+                        image: Icon(
+                          Icons.videocam,
+                          color: primaryColor,
                         ),
-                        PostTypeButton(
-                          context,
-                          press: () {
-                            selectFile();
-                          },
-                          btnColor: Colors.amber.withOpacity(0.2),
-                          image: Icon(
-                            Icons.description,
-                            color: Colors.amber.shade700,
-                          ),
-                          label: 'File',
-                          labelColor: Colors.amber.shade800,
+                        label: 'Video',
+                        labelColor: primaryColor,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      PostTypeButton(
+                        context,
+                        press: () {
+                          selectFile();
+                        },
+                        btnColor: Colors.amber.withOpacity(0.2),
+                        image: Icon(
+                          Icons.description,
+                          color: Colors.amber.shade700,
                         ),
-                      ],
-                    ),
+                        label: 'File',
+                        labelColor: Colors.amber.shade800,
+                      ),
+                    ],
                   ),
-                  PostList(),
                 ],
               ),
             ),
+            PostList(),
           ],
         ),
       ),
@@ -996,29 +986,33 @@ class _HomeUIState extends State<HomeUI> {
 
   Widget PostTypeButton(BuildContext context,
       {final btnColor, labelColor, image, label, press}) {
-    return MaterialButton(
-      onPressed: press,
-      elevation: 0,
-      highlightElevation: 0,
-      highlightColor: btnColor,
-      color: btnColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          image,
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            label,
-            style: TextStyle(
-              color: labelColor,
-              fontWeight: FontWeight.w500,
+    return Expanded(
+      child: MaterialButton(
+        onPressed: press,
+        elevation: 0,
+        highlightElevation: 0,
+        highlightColor: btnColor,
+        color: btnColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            image,
+            SizedBox(
+              width: 10,
             ),
-          ),
-        ],
+            Text(
+              label,
+              style: TextStyle(
+                color: labelColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

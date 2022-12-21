@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
+import 'resources/colors.dart';
+
 class ChewiePlayer extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool looping;
@@ -33,7 +35,7 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
           child: Text(
             'Cannot Play Video',
             style: TextStyle(
-              color: Colors.white,
+              color: whiteColor,
             ),
           ),
         );

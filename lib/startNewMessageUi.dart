@@ -67,7 +67,7 @@ class _NewMessageUiState extends State<NewMessageUi> {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: whiteColor,
             ),
           ),
           backgroundColor: Colors.red.shade700,
@@ -86,14 +86,6 @@ class _NewMessageUiState extends State<NewMessageUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -162,7 +154,7 @@ class _NewMessageUiState extends State<NewMessageUi> {
                               );
                             },
                             child: Container(
-                              color: Colors.white,
+                              color: whiteColor,
                               margin: EdgeInsets.only(top: 15),
                               child: Row(
                                 mainAxisAlignment:

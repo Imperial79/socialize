@@ -18,18 +18,10 @@ class ZoomImageUi extends StatefulWidget {
 class _ZoomImageUiState extends State<ZoomImageUi> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -47,7 +39,7 @@ class _ZoomImageUiState extends State<ZoomImageUi> {
           imageBuilder: (context, image) => PhotoView(
             // minScale: 0.15,
             backgroundDecoration: BoxDecoration(
-              color: Colors.white,
+              color: whiteColor,
             ),
             imageProvider: image,
             loadingBuilder: (context, ImageChunkEvent) => Center(

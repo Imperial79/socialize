@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:page_route_transition/page_route_transition.dart';
-
 import 'loginUi.dart';
 import 'resources/colors.dart';
 import 'resources/myWidgets.dart';
@@ -18,13 +14,6 @@ class WelcomeUI extends StatefulWidget {
 class _WelcomeUIState extends State<WelcomeUI> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
@@ -37,7 +26,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
             //   fit: BoxFit.cover,
             //   // opacity: 0.5,
             //   colorFilter: ColorFilter.mode(
-            //     Colors.white.withOpacity(0.6),
+            //     whiteColor.withOpacity(0.6),
             //     BlendMode.colorDodge,
             //   ),
             // ),

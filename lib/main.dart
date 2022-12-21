@@ -61,10 +61,9 @@ class _MyAppState extends State<MyApp> {
       title: 'Socialize',
       color: primaryColor,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: whiteColor,
         useMaterial3: true,
         colorSchemeSeed: primaryColor,
-        // textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         fontFamily: 'Product',
       ),
       home: FutureBuilder(

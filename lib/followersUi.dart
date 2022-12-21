@@ -19,14 +19,6 @@ class FollowersUi extends StatefulWidget {
 class _FollowersUiState extends State<FollowersUi> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -92,7 +84,7 @@ class _FollowersUiState extends State<FollowersUi> {
                                   context, OthersProfileUi(snap: ds));
                             },
                             child: Container(
-                              color: Colors.white,
+                              color: whiteColor,
                               margin: EdgeInsets.only(top: 15),
                               child: Row(
                                 mainAxisAlignment:

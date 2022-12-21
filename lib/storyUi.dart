@@ -23,18 +23,9 @@ class _StoryUiState extends State<StoryUi> {
   bool isFullScreen = false;
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -123,7 +114,7 @@ class _StoryUiState extends State<StoryUi> {
                           widget.snap['description'],
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: whiteColor,
                           ),
                           textAlign: TextAlign.center,
                           maxLines: 4,

@@ -71,27 +71,14 @@ class _PostViewState extends State<PostView> {
                       fontSize: 12,
                     ),
                   )
-            : Container(); //TODO
+            : Container();
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldColor = isDarkMode ? Colors.grey.shade900 : Colors.white;
-
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness:
-            isDarkMode ? Brightness.light : Brightness.dark,
-        statusBarColor: isDarkMode ? Colors.grey.shade900 : Colors.transparent,
-        systemNavigationBarColor:
-            isDarkMode ? Colors.grey.shade900 : Colors.white,
-      ),
-    );
     return Scaffold(
-      backgroundColor: scaffoldColor,
       body: SafeArea(
         child: StreamBuilder<dynamic>(
           stream: FirebaseFirestore.instance
@@ -137,7 +124,9 @@ class _PostViewState extends State<PostView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  ds['username'],
+                                  ds['username'] == UserDetails.userName
+                                      ? 'You'
+                                      : ds['username'],
                                   style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.grey.shade100
@@ -233,7 +222,7 @@ class _PostViewState extends State<PostView> {
                                     child: LikeAnimation(
                                       child: SvgPicture.asset(
                                         'lib/assets/image/like_filled.svg',
-                                        color: Colors.white,
+                                        color: whiteColor,
                                         height: 100,
                                       ),
                                       isAnimating: isLikeAnimating,

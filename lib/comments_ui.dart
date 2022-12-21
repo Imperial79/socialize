@@ -87,7 +87,7 @@ class _CommentsUiState extends State<CommentsUi> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 50),
                   child: CircularProgressIndicator(
-                    color: Colors.teal.shade400,
+                    color: primaryColor,
                   ),
                 ),
               );
@@ -97,15 +97,6 @@ class _CommentsUiState extends State<CommentsUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -115,7 +106,7 @@ class _CommentsUiState extends State<CommentsUi> {
           },
           icon: SvgPicture.asset(
             'lib/assets/image/back.svg',
-            color: Colors.white,
+            color: whiteColor,
           ),
         ),
         elevation: 0,
@@ -123,7 +114,7 @@ class _CommentsUiState extends State<CommentsUi> {
         title: Text(
           'Comments',
           style: TextStyle(
-            color: Colors.white,
+            color: whiteColor,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),

@@ -5,7 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_route_transition/page_route_transition.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:socialize/imagePreview.dart';
 import 'package:socialize/services/auth.dart';
+import 'package:socialize/utilities/sdp.dart';
+import 'package:socialize/utilities/utility.dart';
 
 import 'addStoryUi.dart';
 import 'editProfileUi.dart';
@@ -75,7 +78,7 @@ class _ProfileUiState extends State<ProfileUi> {
             gradient: LinearGradient(
               colors: [
                 Colors.grey,
-                Colors.white,
+                whiteColor,
               ],
             ),
           );
@@ -178,42 +181,7 @@ class _ProfileUiState extends State<ProfileUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness:
-            isDarkMode ? Brightness.light : Brightness.dark,
-        statusBarColor: isDarkMode ? Colors.grey.shade900 : Colors.transparent,
-        systemNavigationBarColor:
-            isDarkMode ? Colors.grey.shade900 : Colors.white,
-      ),
-    );
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   automaticallyImplyLeading: false,
-      //   title: Row(
-      //     children: [
-      //       SvgPicture.asset(
-      //         'lib/assets/image/profile_filled.svg',
-      //         height: 20,
-      //         color: primaryColor,
-      //       ),
-      //       SizedBox(
-      //         width: 10,
-      //       ),
-      //       Text(
-      //         'PROFILE',
-      //         style: TextStyle(
-      //           fontWeight: FontWeight.w700,
-      //           color: primaryColor,
-      //           letterSpacing: 10,
-      //           fontSize: 20,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: SafeArea(
         child: UserDetails.uid == ''
             ? Center(
@@ -225,161 +193,193 @@ class _ProfileUiState extends State<ProfileUi> {
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 205,
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(20),
-                          height: 160,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            UserDetails.bio,
-                            style: TextStyle(
-                              fontSize: UserDetails.bio.length > 100 ? 20 : 40,
-                              color: Colors.grey.shade400,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 125,
-                          left: 30,
-                          child: Container(
-                            height: 70,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              color: Color(0xfff2f7fa),
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Color(0xfff2f7fa),
-                                width: 3.5,
-                              ),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: UserDetails.userProfilePic == ''
-                                  ? CircularProgressIndicator(
-                                      color: primaryColor,
-                                    )
-                                  : CachedNetworkImage(
-                                      imageUrl: UserDetails.userProfilePic,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 10,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              UserDetails.userName,
-                              style: TextStyle(
-                                color: Colors.blueGrey.shade700,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 205,
                               ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 15,
-                                  child: Text('@'),
+                              Container(
+                                padding: EdgeInsets.all(20),
+                                height: 160,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  UserDetails.userEmail,
+                                child: Text(
+                                  UserDetails.bio,
                                   style: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        UserDetails.bio.length > 100 ? 20 : 40,
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.w900,
                                   ),
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: MaterialButton(
-                                    onPressed: () {
-                                      PageRouteTransition.push(
-                                              context, UpdateProfileUi())
-                                          .then((value) {
-                                        setState(() {});
-                                      });
-                                    },
-                                    elevation: 0,
-                                    highlightElevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                    ),
-                                    color: primaryColor,
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      child: Text(
-                                        'Edit Profile',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                        ),
+                              ),
+                              Positioned(
+                                top: 125,
+                                left: 20,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    NavPush(
+                                        context,
+                                        ZoomImageUi(
+                                          img: UserDetails.userProfilePic,
+                                        ));
+                                  },
+                                  child: Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      color: whiteColor,
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: whiteColor,
+                                        width: 5,
                                       ),
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Flexible(
-                                  child: MaterialButton(
-                                    onPressed: () {
-                                      AuthMethods().logoutuser();
-                                      PageRouteTransition.effect =
-                                          TransitionEffect.leftToRight;
-                                      PageRouteTransition.pushReplacement(
-                                          context, LoginUi());
-                                    },
-                                    elevation: 0,
-                                    highlightElevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                    ),
-                                    color: Colors.red,
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      child: Text(
-                                        'Logout',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                        ),
-                                        textAlign: TextAlign.right,
-                                      ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: UserDetails.userProfilePic == ''
+                                          ? CircularProgressIndicator(
+                                              color: primaryColor,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl:
+                                                  UserDetails.userProfilePic,
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                                 ),
-                              ],
+                              ),
+                            ],
+                          ),
+                          Text(
+                            UserDetails.userName,
+                            style: TextStyle(
+                              color: Colors.blueGrey.shade700,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
                             ),
-                          ],
-                        ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 15,
+                                child: Text('@'),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                UserDetails.userEmail,
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Flexible(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    PageRouteTransition.push(
+                                            context, UpdateProfileUi())
+                                        .then((value) {
+                                      setState(() {});
+                                    });
+                                  },
+                                  elevation: 0,
+                                  highlightElevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  color: primaryColor,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Edit Profile',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: whiteColor,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.edit,
+                                          color: whiteColor,
+                                          size: sdp(context, 15),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    AuthMethods().logoutuser();
+                                    PageRouteTransition.effect =
+                                        TransitionEffect.leftToRight;
+                                    PageRouteTransition.pushReplacement(
+                                        context, LoginUi());
+                                  },
+                                  elevation: 0,
+                                  highlightElevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  color: Colors.red,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(
+                                          Icons.exit_to_app,
+                                          color: whiteColor,
+                                        ),
+                                        Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: whiteColor,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -400,52 +400,22 @@ class _ProfileUiState extends State<ProfileUi> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: primaryAccentColor,
-                                    ),
-                                    child: StreamBuilder<dynamic>(
-                                      stream: FirebaseFirestore.instance
-                                          .collection('posts')
-                                          .where('uid',
-                                              isEqualTo: UserDetails.uid)
-                                          .snapshots(),
-                                      builder: (context, snapshot) {
-                                        if (!snapshot.hasData) {
-                                          return Column(
-                                            children: [
-                                              Text(
-                                                '0',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: primaryColor,
-                                                  fontSize: 20,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                'Posts',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w900,
-                                                  color: primaryColor,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }
+                                  child: StreamBuilder<dynamic>(
+                                    stream: FirebaseFirestore.instance
+                                        .collection('posts')
+                                        .where('uid',
+                                            isEqualTo: UserDetails.uid)
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
                                         return Column(
                                           children: [
                                             Text(
-                                              snapshot.data.docs.length
-                                                  .toString(),
+                                              '0',
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w900,
                                                 color: primaryColor,
-                                                fontSize: 20,
+                                                fontSize: sdp(context, 20),
                                               ),
                                             ),
                                             SizedBox(
@@ -454,14 +424,37 @@ class _ProfileUiState extends State<ProfileUi> {
                                             Text(
                                               'Posts',
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                color: primaryColor,
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                           ],
                                         );
-                                      },
-                                    ),
+                                      }
+                                      return Column(
+                                        children: [
+                                          Text(
+                                            snapshot.data.docs.length
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              color: primaryColor,
+                                              fontSize: sdp(context, 20),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            'Posts',
+                                            style: TextStyle(
+                                              color: blackColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
                                 ),
                                 SizedBox(
@@ -473,34 +466,27 @@ class _ProfileUiState extends State<ProfileUi> {
                                       PageRouteTransition.push(
                                           context, FollowingUi());
                                     },
-                                    child: Container(
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: primaryAccentColor,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            ds['following'].length.toString(),
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: primaryColor,
-                                              fontSize: 20,
-                                            ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          ds['following'].length.toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w900,
+                                            color: primaryColor,
+                                            fontSize: sdp(context, 20),
                                           ),
-                                          SizedBox(
-                                            height: 5,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          'Following',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: blackColor,
                                           ),
-                                          Text(
-                                            'Following',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w900,
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -513,35 +499,28 @@ class _ProfileUiState extends State<ProfileUi> {
                                       PageRouteTransition.push(
                                           context, FollowersUi());
                                     },
-                                    child: Container(
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: primaryAccentColor,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          // FollowerCount(),
-                                          Text(
-                                            ds['followers'].length.toString(),
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: primaryColor,
-                                              fontSize: 20,
-                                            ),
+                                    child: Column(
+                                      children: [
+                                        // FollowerCount(),
+                                        Text(
+                                          ds['followers'].length.toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w900,
+                                            color: primaryColor,
+                                            fontSize: sdp(context, 20),
                                           ),
-                                          SizedBox(
-                                            height: 5,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          'Followers',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: blackColor,
                                           ),
-                                          Text(
-                                            'Followers',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w900,
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -580,7 +559,7 @@ class _ProfileUiState extends State<ProfileUi> {
                             child: Text(
                               'Add to Story',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

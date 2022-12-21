@@ -98,14 +98,6 @@ class _SignUpUiState extends State<SignUpUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.grey.shade300,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -118,7 +110,7 @@ class _SignUpUiState extends State<SignUpUi> {
         //     fit: BoxFit.cover,
         //     opacity: 1,
         //     colorFilter: ColorFilter.mode(
-        //       Colors.white.withOpacity(0.6),
+        //       whiteColor.withOpacity(0.6),
         //       BlendMode.lighten,
         //     ),
         //   ),
@@ -259,12 +251,12 @@ class _SignUpUiState extends State<SignUpUi> {
             //                     child: Center(
             //                       child: isLoading
             //                           ? CircularProgressIndicator(
-            //                               color: Colors.white,
+            //                               color: whiteColor,
             //                             )
             //                           : Text(
             //                               'Create Account',
             //                               style: TextStyle(
-            //                                 color: Colors.white,
+            //                                 color: whiteColor,
             //                               ),
             //                             ),
             //                     ),
@@ -452,7 +444,7 @@ class _SignUpUiState extends State<SignUpUi> {
                                     : Text(
                                         'Create Account',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: whiteColor,
                                         ),
                                       ),
                               ),
@@ -509,7 +501,7 @@ class _SignUpUiState extends State<SignUpUi> {
                           child: Text(
                             'Log In',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: whiteColor,
                               letterSpacing: 1.6,
                               fontSize: 12,
                               fontWeight: FontWeight.w800,

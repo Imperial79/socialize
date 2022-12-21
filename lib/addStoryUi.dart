@@ -306,7 +306,7 @@ class _AddStoryUiState extends State<AddStoryUi> {
             child: Text(
               'Add to Story',
               style: TextStyle(
-                color: Colors.white,
+                color: whiteColor,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,

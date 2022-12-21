@@ -107,7 +107,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: whiteColor,
             ),
           ),
           backgroundColor: Colors.red.shade700,
@@ -190,17 +190,9 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -263,7 +255,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                               ds['bio'],
                               style: TextStyle(
                                 fontSize: 20,
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -388,7 +380,7 @@ class _OthersProfileUiState extends State<OthersProfileUi> {
                               fontSize: 16,
                               color: ds['followers'].contains(UserDetails.uid)
                                   ? primaryColor
-                                  : Colors.white,
+                                  : whiteColor,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

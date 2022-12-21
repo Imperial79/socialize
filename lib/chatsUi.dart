@@ -162,18 +162,10 @@ class _ChatsUiState extends State<ChatsUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         title: Row(
           children: [
             SvgPicture.asset(
@@ -208,7 +200,7 @@ class _ChatsUiState extends State<ChatsUi> {
               child: Container(
                 padding: EdgeInsets.all(10),
                 width: double.infinity,
-                color: Colors.white,
+                color: whiteColor,
                 child: PersonalchatRoomList(),
               ),
             ),
@@ -217,7 +209,7 @@ class _ChatsUiState extends State<ChatsUi> {
               width: double.infinity,
               // height: 60,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: whiteColor,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.shade200,
@@ -243,7 +235,7 @@ class _ChatsUiState extends State<ChatsUi> {
                     child: Text(
                       'Start new message',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

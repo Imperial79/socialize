@@ -130,17 +130,8 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: whiteColor,
         title: Text(
@@ -148,33 +139,18 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
           style: TextStyle(color: primaryColor, fontWeight: FontWeight.w700),
         ),
       ),
-      body: SafeArea(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(height: 10),
-                  // Expanded(
-                  //   child: Text(
-                  //     'EDIT PROFILE',
-                  //     style: TextStyle(
-                  //       color: primaryColor,
-                  //       fontSize: 30,
-                  //       letterSpacing: 5,
-                  //       wordSpacing: 3,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height * 0.05,
-                  // ),
-                  Stack(
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(height: 10),
+                Flexible(
+                  child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       _image != null
@@ -210,65 +186,68 @@ class _UpdateProfileUiState extends State<UpdateProfileUi> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomTextField(
+                  label: 'Username',
+                  obsecureText: false,
+                  textCapitalization: TextCapitalization.sentences,
+                  textEditingController: usernameController,
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'This Field is required';
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextField(
+                  label: 'Bio',
+                  obsecureText: false,
+                  maxLines: 3,
+                  textCapitalization: TextCapitalization.sentences,
+                  textEditingController: bioController,
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    if (value!.isEmpty) return 'This Field is required';
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    if (!isLoading) updateProfile();
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  CustomTextField(
-                    label: 'Username',
-                    obsecureText: false,
-                    textCapitalization: TextCapitalization.sentences,
-                    textEditingController: usernameController,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'This Field is required';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Bio',
-                    obsecureText: false,
-                    maxLines: 3,
-                    textCapitalization: TextCapitalization.sentences,
-                    textEditingController: bioController,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) return 'This Field is required';
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      if (!isLoading) updateProfile();
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: primaryColor,
-                    elevation: 0,
-                    highlightElevation: 0,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      width: double.infinity,
-                      child: Center(
-                        child: isLoading
-                            ? CustomProgressIndicator()
-                            : Text(
-                                'Update Details',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                  color: primaryColor,
+                  elevation: 0,
+                  highlightElevation: 0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    width: double.infinity,
+                    child: Center(
+                      child: isLoading
+                          ? CustomProgressIndicator()
+                          : Text(
+                              'Update Details',
+                              style: TextStyle(
+                                color: whiteColor,
+                                fontWeight: FontWeight.w500,
                               ),
-                      ),
+                            ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
           ),
         ),

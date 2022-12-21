@@ -17,14 +17,6 @@ class FollowingUi extends StatefulWidget {
 class _FollowingUiState extends State<FollowingUi> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-      ),
-    );
     return Scaffold(
       body: SafeArea(
         child: Padding(
